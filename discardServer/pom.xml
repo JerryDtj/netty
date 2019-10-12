@@ -11,5 +11,14 @@
 
     <artifactId>discardServer</artifactId>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-buffer -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+            <version>4.1.42.Final</version>
+        </dependency>
 
+
+    </dependencies>
 </project>
