@@ -13,7 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  */
 public class TimerClient {
     public static void main(String[] args) {
-        String host = "127.0.0.1";
+        String host = "localhost";
         int port = 8080;
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         Bootstrap b = new Bootstrap();
@@ -23,7 +23,7 @@ public class TimerClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new TimerServerHandle());
+                        ch.pipeline().addLast(new TimerClientHandle());
                     }
                 });
         try {
