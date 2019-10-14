@@ -37,7 +37,7 @@ public class TimerServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new  TimerServerHandle());
+                        ch.pipeline().addLast(new TimerEncoder(),new  TimerServerHandle());
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG,128)

@@ -23,7 +23,7 @@ public class TimerClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new TimerClientHandle());
+                        ch.pipeline().addLast(new TimerDecode(),new TimerClientHandle());
                     }
                 });
         try {
