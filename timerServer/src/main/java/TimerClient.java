@@ -19,19 +19,19 @@ public class TimerClient {
         Bootstrap b = new Bootstrap();
         b.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
-                .option(ChannelOption.SO_KEEPALIVE,true)
+                .option(ChannelOption.SO_KEEPALIVE, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new TimerDecode(),new TimerClientHandle());
+                        ch.pipeline().addLast(new TimerDecode(), new TimerClientHandle());
                     }
                 });
         try {
-            ChannelFuture future = b.connect(host,port).sync();
+            ChannelFuture future = b.connect(host, port).sync();
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             eventLoopGroup.shutdownGracefully();
         }
 

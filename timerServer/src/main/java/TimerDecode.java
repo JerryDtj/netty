@@ -15,7 +15,7 @@ public class TimerDecode extends ReplayingDecoder<Void> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-        if (in.readableBytes()<4){
+        if (in.readableBytes() < 4) {
             return;
         }
         out.add(new UnixTime(in.readUnsignedInt()));

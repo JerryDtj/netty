@@ -13,15 +13,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  */
 public class TimerServer {
     private int port;
-    TimerServer(int port){
+
+    TimerServer(int port) {
         this.port = port;
     }
 
     public static void main(String[] args) {
         int port;
-        if (args.length>0){
+        if (args.length > 0) {
             port = Integer.parseInt(args[0]);
-        }else {
+        } else {
             port = 8080;
         }
 
@@ -32,17 +33,17 @@ public class TimerServer {
         EventLoopGroup serverGoup = new NioEventLoopGroup();
         EventLoopGroup clientGoup = new NioEventLoopGroup();
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(serverGoup,clientGoup)
+        bootstrap.group(serverGoup, clientGoup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new TimerEncoder(),new  TimerServerHandle());
+                        ch.pipeline().addLast(new TimerEncoder(), new TimerServerHandle());
                     }
                 })
-                .option(ChannelOption.SO_BACKLOG,128)
-                .childOption(ChannelOption.SO_KEEPALIVE,true)
-                ;
+                .option(ChannelOption.SO_BACKLOG, 128)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
+        ;
         try {
             ChannelFuture future = bootstrap.bind(port).sync();
             future.channel().closeFuture().sync();

@@ -13,8 +13,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class TimerServerHandle extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) throws Exception {
-       ChannelFuture channelFuture = ctx.writeAndFlush(new UnixTime());
-       channelFuture.addListener(ChannelFutureListener.CLOSE);
+        ChannelFuture channelFuture = ctx.writeAndFlush(new UnixTime());
+        channelFuture.addListener(ChannelFutureListener.CLOSE);
     }
 
     @Override

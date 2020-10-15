@@ -1,4 +1,4 @@
-package server;
+package client;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -6,22 +6,21 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
-
+import io.netty.handler.codec.string.StringEncoder;
 
 /**
  * @author Jerry
- * @Date 2019/10/19 9:27 上午
+ * @Date 2019/10/23 10:43 下午
  */
-public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
+public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline channelPipeline = ch.pipeline();
+
         channelPipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()))
-                .addLast("decoder", new StringDecoder())
-                .addLast("encoder", new StringDecoder())
-                .addLast("handle", new ServerHander())
-        ;
-        System.out.println("SimpleChatClient:" + ch.remoteAddress() + "连接上");
+                .addLast("deCoder", new StringDecoder())
+                .addLast("enCoder", new StringEncoder())
+                .addLast("handler", new ClientHander());
     }
 }

@@ -18,8 +18,8 @@ public class ServerHander extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        for (Channel c:channels){
-            c.writeAndFlush(String.format("id:%s,ip:%s is coming",channel.id(),channel.remoteAddress()));
+        for (Channel c : channels) {
+            c.writeAndFlush(String.format("id:%s,ip:%s is coming", channel.id(), channel.remoteAddress()));
         }
         channels.add(channel);
     }
@@ -27,8 +27,8 @@ public class ServerHander extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        for (Channel c:channels){
-            c.writeAndFlush(String.format("id:%s,ip:%s is remove",channel.id(),channel.remoteAddress()));
+        for (Channel c : channels) {
+            c.writeAndFlush(String.format("id:%s,ip:%s is remove", channel.id(), channel.remoteAddress()));
         }
         channels.remove(channel);
     }
@@ -36,23 +36,23 @@ public class ServerHander extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        channel.writeAndFlush(String.format(String.format("id:%s,ip:%s is online",channel.id(),channel.remoteAddress())));
+        channel.writeAndFlush(String.format(String.format("id:%s,ip:%s is online", channel.id(), channel.remoteAddress())));
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        channel.writeAndFlush(String.format(String.format("id:%s,ip:%s is offline",channel.id(),channel.remoteAddress())));
+        channel.writeAndFlush(String.format(String.format("id:%s,ip:%s is offline", channel.id(), channel.remoteAddress())));
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Channel channel = ctx.channel();
-        for (Channel c:channels){
-            if (c!=channel){
-                c.writeAndFlush(String.format(String.format("id:%s,ip:%s send a msg: %s",channel.id(),channel.remoteAddress(),msg)));
-            }else {
-                c.writeAndFlush(String.format(String.format("you send a msg: %s",msg)));
+        for (Channel c : channels) {
+            if (c != channel) {
+                c.writeAndFlush(String.format(String.format("id:%s,ip:%s send a msg: %s", channel.id(), channel.remoteAddress(), msg)));
+            } else {
+                c.writeAndFlush(String.format(String.format("you send a msg: %s", msg)));
             }
         }
     }
@@ -60,7 +60,7 @@ public class ServerHander extends SimpleChannelInboundHandler<String> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         Channel channel = ctx.channel();
-        System.out.println("SimpleChatClient:"+channel.remoteAddress()+"异常");
+        System.out.println("SimpleChatClient:" + channel.remoteAddress() + "异常");
         cause.printStackTrace();
         ctx.close();
     }

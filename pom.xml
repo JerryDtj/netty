@@ -11,7 +11,8 @@
     <modules>
         <module>discardServer</module>
         <module>timerServer</module>
-        <module>websocket</module>
+        <module>readAndSend</module>
+        <module>FileSendServer</module>
     </modules>
 
     <dependencyManagement>
