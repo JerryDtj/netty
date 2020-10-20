@@ -23,9 +23,9 @@ import java.util.Map;
  * @Date 2020/10/15 7:18 上午
  */
 public class RpcServer {
-    private Map<String,Object> fileMap = new HashMap<String, Object>();
+    private Map<String,Class> fileMap = new HashMap<String, Class>();
 
-    public Map<String, Object> getFileMap() {
+    public Map<String, Class> getFileMap() {
         return fileMap;
     }
 
@@ -42,12 +42,14 @@ public class RpcServer {
             }else if (file.getName().endsWith("class")){
                 String fileName = (packageLocations+"."+file.getName()).replace(".class","");
                 Class c = Class.forName(fileName);
-                fileMap.put(fileName,c.newInstance());
+                fileMap.put(fileName,c);
             }
         }
     }
 
     public void receive() throws InterruptedException {
+        ReceiveHandler handler = new ReceiveHandler();
+
         final EventLoopGroup parentGroup = new NioEventLoopGroup();
         EventLoopGroup childGroup = new NioEventLoopGroup();
         try {
