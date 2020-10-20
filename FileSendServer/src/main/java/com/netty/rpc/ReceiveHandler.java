@@ -2,7 +2,7 @@ package com.netty.rpc;
 
 import com.netty.send.iservice.domain.ServiceDoMain;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Jerry
  * @Date 2020/10/20 8:18 上午
  */
-public class ReceiveHandler extends SimpleChannelInboundHandler {
+public class ReceiveHandler extends ChannelInboundHandlerAdapter {
     private Map<String,Class> methodMap = new HashMap<String, Class>();
 
     public void setMethodMap(Map<String, Class> methodMap) {
@@ -20,7 +20,7 @@ public class ReceiveHandler extends SimpleChannelInboundHandler {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof ServiceDoMain){
             ServiceDoMain s = (ServiceDoMain) msg;
             Object result = "没有实现该方法，请检查版本";
