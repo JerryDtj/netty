@@ -1,10 +1,12 @@
 package com.netty.send.iservice.domain;
 
+import java.io.Serializable;
+
 /**
  * @author Jerry
  * @Date 2020/10/19 11:17 下午
  */
-public class ServiceDoMain {
+public class ServiceDoMain implements Serializable {
     private String className;
 
     private String methodName;

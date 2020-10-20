@@ -19,6 +19,7 @@ public class ReceiveHandler extends SimpleChannelInboundHandler {
         this.methodMap = methodMap;
     }
 
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof ServiceDoMain){
             ServiceDoMain s = (ServiceDoMain) msg;
