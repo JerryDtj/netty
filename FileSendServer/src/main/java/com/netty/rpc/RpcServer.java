@@ -45,7 +45,7 @@ public class RpcServer {
     }
 
     public void receive() throws InterruptedException {
-        ReceiveHandler handler = new ReceiveHandler();
+        final ReceiveHandler handler = new ReceiveHandler();
         handler.setMethodMap(fileMap);
 
         final EventLoopGroup parentGroup = new NioEventLoopGroup();
