@@ -15,6 +15,7 @@
         <module>FileSendServer</module>
         <module>FileApi</module>
         <module>FileSendClient</module>
+        <module>bioServer</module>
     </modules>
 
     <dependencyManagement>
