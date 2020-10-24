@@ -1,16 +1,11 @@
-package com.bio.client;
+package com.bio.ketang.client;
 
-import com.bio.server.ServerStart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.applet.Main;
-import sun.rmi.runtime.Log;
 
 import java.io.*;
 import java.net.Socket;
-import java.rmi.server.ExportException;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * @author Jerry

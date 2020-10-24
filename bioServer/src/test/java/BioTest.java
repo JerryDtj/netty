@@ -1,5 +1,5 @@
-import com.bio.client.ClientStart;
-import com.bio.server.ServerStart;
+import com.bio.ketang.client.ClientStart;
+import com.bio.ketang.server.ServerStart;
 
 import java.io.IOException;
 import java.util.Random;
