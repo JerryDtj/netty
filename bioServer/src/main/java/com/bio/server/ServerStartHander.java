@@ -25,12 +25,12 @@ public class ServerStartHander implements Runnable {
         PrintWriter printWriter = null;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            printWriter = new PrintWriter(socket.getOutputStream());
+            printWriter = new PrintWriter(socket.getOutputStream(),true);
             String exprocess;
             String result;
             while (true){
                 if ((exprocess = bufferedReader.readLine())!=null){
-                    log.info("bio服务端接收到消息："+exprocess);
+                    System.out.println("bio服务端接收到消息："+exprocess);
                     result = Calculator.cal(exprocess);
                     printWriter.println(result);
                 }else {

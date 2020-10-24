@@ -1,4 +1,5 @@
-import com.bio.server.ServerStartHander;
+package com.bio.server;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,21 +22,25 @@ public class ServerStart {
         Start(SERVER_POINT);
     }
 
-    private static void Start(int serverPoint)  {
+    private synchronized static void Start(int serverPoint)  {
+        if (serverSocket!=null) return;
         try {
             serverSocket = new ServerSocket(serverPoint);
-            log.info("Bio服务端已启动，启动端口为："+serverPoint);
+            System.out.println("Bio服务端已启动，启动端口为：" + serverPoint);
             while (true){
                 Socket socket = serverSocket.accept();
-                new Thread(new ServerStartHander(socket));
+                new Thread(new ServerStartHander(socket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
             log.error(e.getLocalizedMessage());
         } finally {
             try {
-                serverSocket.close();
-                log.info("服务端已经关闭");
+                if (serverSocket!=null){
+                    serverSocket.close();
+                    System.out.println("服务端已经关闭");
+                    serverSocket = null;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
