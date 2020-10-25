@@ -13,7 +13,7 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(serverPort);
 //        因为想服务端一直接收消息，所以这里死循环
         while (true){
-            //服务端阻塞
+            //如果没有服务介入，服务端会在accept()上阻塞
             Socket socket = serverSocket.accept();
             ServerHander serverHander = new ServerHander();
             serverHander.setSocket(socket);
