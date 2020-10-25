@@ -11,7 +11,9 @@ import java.net.Socket;
 public class Server {
     protected void start(int serverPort) throws IOException {
         ServerSocket serverSocket = new ServerSocket(serverPort);
+//        因为想服务端一直接收消息，所以这里死循环
         while (true){
+            //服务端阻塞
             Socket socket = serverSocket.accept();
             ServerHander serverHander = new ServerHander();
             serverHander.setSocket(socket);
